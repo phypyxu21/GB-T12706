@@ -2,10 +2,10 @@
 def wrap_inner_liner(d_cl,none):
     if d_cl<=40:
         print("绕包内衬层厚度为：0.4mm")
-        d_cl=[x+0.4*4 for x in d_cl]
+        d_cl=[x+0.4*2 for x in d_cl]
         return d_cl
     else:
         print("绕包内衬层厚度为：0.6mm")
-        d_cl=[x+0.6 *4 for x in d_cl]
+        d_cl=[x+0.6 *2 for x in d_cl]
         return d_cl
     

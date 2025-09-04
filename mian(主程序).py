@@ -8,17 +8,31 @@ from 假设直径 import r_d as rd
 from 绝缘厚度 import get_insulation_data as gd
 #获得成缆直径
 from 成揽直径计算 import calculate_diameter as cd
-
+#获得最薄点
 from 绝缘要求 import judge_insulation as ji
-
+#获得导体结构
 from 导体结构 import get_conductor_structure as gcs
+#获得外径尺寸对应值
 from 外径尺寸对应值 import get_outer_diameter as god
-from 火花 import insulation_spark_test
-
+#获得工频绝缘火花试验电压
+from 绝缘火花试验电压 import insulation_spark_test
+#获得绕bopp带和挤出护套火花实验电压
 from bopp和挤出护套火花实验 import bopp_thickness as bt
+#列表求和
 from itertools import zip_longest
+#获得挤包内护套厚度
 from 挤包内护套 import extrusion_inner_sheath as eis
-#型号输入
+#获得金属层 屏蔽 隔离 铠装及相应厚度
+from 金属层_屏蔽隔离铠装 import copper_tape_thickness as ctt
+
+
+
+
+
+
+
+
+
 print("请输入电缆的型号(不管大小写)：")
 print("例如：VV、YJV22、vv")
 
@@ -108,14 +122,23 @@ print("假设成缆直径为：", d_cl[0],"成缆直径为：", d_cl[1])
 d_bp=bt(d_cl,spec_C_sum)
 
 
-#内护套厚度
+#内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
            bp=eis(d_bp)
-           print("挤包内护套后的标称厚度为：", bp[0],"挤包内护套后的厚度为：", bp[1])
+           print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
 
 elif voltage_numbers_int[1]==3:
             bp=eis(d_bp)
-            print("挤包内护套后的标称厚度为：", bp[0],"挤包内护套后的厚度为：", bp[1])
+            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
+            "单层铜带屏蔽"
 
 else:
             print("不需要挤包内护套")
+
+
+
+
+
+
+#外护套
+
