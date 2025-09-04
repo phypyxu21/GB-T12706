@@ -15,11 +15,18 @@ from itertools import zip_longest
 #铜带标称厚度
 #一般为两层铜带重叠部分绕包
 #对于1.8/3kV的电缆，铜带则为一层重叠
+#待补充
 def copper_tape_thickness(spec_C_sum,full_info,d_cl):
-    if spec_C_sum[0]==1:
-        print("单芯电缆铜带标称厚度为：>= 0.12 mm ")
-    else:
-        print("多芯电缆铜带标称厚度为：>= 0.10 mm ")
+    if full_info['sheath_armour_info']['armour']==None:
+        #铜带屏蔽，可能存在其他的屏蔽
+        if spec_C_sum[0]==1:
+            print("单芯电缆铜带标称厚度为：>= 0.12 mm ")
+            return [x+4*d_copper[0] for x in d_cl]
+        else:
+            print("多芯电缆铜带标称厚度为：>= 0.10 mm ")
+            return [x+4*d_copper[1] for x in d_cl]
+    
+
 
 
 #金属铠装

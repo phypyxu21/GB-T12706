@@ -24,7 +24,9 @@ from itertools import zip_longest
 from 挤包内护套 import extrusion_inner_sheath as eis
 #获得金属层 屏蔽 隔离 铠装及相应厚度
 from 金属层_屏蔽隔离铠装 import copper_tape_thickness as ctt
-
+from 金属层_屏蔽隔离铠装 import isolation_sheath as iss
+from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
+from 挤包外护套 import rd 
 
 
 
@@ -126,15 +128,20 @@ d_bp=bt(d_cl,spec_C_sum)
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
            bp=eis(d_bp)
            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
+#隔离套
+           d_cl=iss(bp)
+           print("隔离套后的标称直径为：", d_cl[0],"隔离套后的直径为：", d_cl[1])
+#铠装
+           d_cl=amwas(d_cl)
+           print("铠装后的标称直径为：", d_cl[0],"铠装后的直径为：", d_cl[1])
 
 elif voltage_numbers_int[1]==3:
             bp=eis(d_bp)
             print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
             "单层铜带屏蔽"
-
+            
 else:
             print("不需要挤包内护套")
-
 
 
 
