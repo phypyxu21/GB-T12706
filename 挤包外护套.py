@@ -11,14 +11,14 @@ def rd_out(spec_C_sum,d_cl):
             return [x+1.4*2 for x in d_cl]
         else:
             print("单芯电缆外护套标称厚度为：", round(d_os[0],3),"mm")
-            return [x+round([x*2 for x in d_os],2) for x in d_cl]
+            return [x+round(d_os[0]*2,2) for x in d_cl]
     else:
         if d_os[0]<1.8:
             print("多芯电缆外护套标称厚度为：1.8 mm ")
             return [x+1.8*2 for x in d_cl]
         else:
             print("多芯电缆外护套标称厚度为：", round(d_os[0],3),"mm")
-            return [x+round([x*2 for x in d_os],2) for x in d_cl]
+            return [x+round(d_os[0]*2,2) for x in d_cl]
 
 """
 #样例： 

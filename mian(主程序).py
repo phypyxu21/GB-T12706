@@ -132,7 +132,7 @@ if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != No
            d_cl=iss(bp)
            print("隔离套后的标称直径为：", d_cl[0],"隔离套后的直径为：", d_cl[1])
 #铠装
-           d_cl=amwas(d_cl)
+           d_cl=amwas(d_cl,full_info)
            print("铠装后的标称直径为：", d_cl[0],"铠装后的直径为：", d_cl[1])
 
 elif voltage_numbers_int[1]==3:
@@ -148,4 +148,6 @@ else:
 
 
 #外护套
+d_cl=rd_out(spec_C_sum,d_cl)
+print("电缆外护套后标称厚度及实际厚度分别为： ",d_cl)
 
