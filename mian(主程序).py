@@ -48,6 +48,7 @@ for i in name_big:
 
 #调出函数，获得正确的名字
 print("电缆名称为：", "".join(fn(name_list)) + "电力电缆\n")
+#名字全信息
 full_info = fn(name_list, return_full_info=True)
 
 
@@ -122,7 +123,7 @@ print("假设成缆直径为：", d_cl[0],"成缆直径为：", d_cl[1])
 
 #加BOPP带后的厚度
 d_bp=bt(d_cl,spec_C_sum)
-
+d_cl=d_bp
 
 #内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
@@ -139,7 +140,8 @@ elif voltage_numbers_int[1]==3:
             bp=eis(d_bp)
             print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
             "单层铜带屏蔽"
-            
+            d_cl=ctt(bp,full_info)
+            print("单层铜带屏蔽后的标称直径为：", d_cl[0],"单层铜带屏蔽后的直径为：", d_cl[1])
 else:
             print("不需要挤包内护套")
 
