@@ -3,8 +3,8 @@ import math
 from itertools import chain#合并列表的方法
 def bopp_thickness(d_cl,spec_C_sum):
     
-    d_cl=list(chain.from_iterable(d_cl))
-    if spec_C_sum != 1:
+    
+    if spec_C_sum[0] != 1:
     #加上BOPP带的厚度
         print("加上2根BOPP带的厚度为：", [x + 0.06*4 for x in d_cl])
         return [x + 0.06*4 for x in d_cl]#包bopp带的后的厚度

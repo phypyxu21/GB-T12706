@@ -26,7 +26,7 @@ from 挤包内护套 import extrusion_inner_sheath as eis
 from 金属层_屏蔽隔离铠装 import copper_tape_thickness as ctt
 from 金属层_屏蔽隔离铠装 import isolation_sheath as iss
 from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
-from 挤包外护套 import rd 
+from 挤包外护套 import rd_out 
 
 
 

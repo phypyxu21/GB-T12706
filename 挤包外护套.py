@@ -2,7 +2,7 @@
 #挤包外护套
 #单芯电缆外护套标称厚度小于1.4的取1.4，多芯电缆外护套标称厚度小于1.8的取1.8
 
-def rd(spec_C_sum,d_cl):
+def rd_out(spec_C_sum,d_cl):
     d_os=[x*0.035+1 for x in d_cl]
     
     if spec_C_sum[0]==1:

@@ -23,12 +23,12 @@ def calculate_diameter(spec_C_sum, spec_S_int,spec_C_int,d_jY):
     if len(spec_C_int) == 1:#单芯同截面
         d_l=[x*k for x in d] #缆芯直径计算
     else:
-        if spec_C_sum == 3:#三芯小截面判定
+        if spec_C_sum[0] == 3:#三芯小截面判定
             if 2/3*d_s[0]>d_s[1]:
                 d_l = 2*d[0]
             else:
                 d_l = 2.16/3*(d[1]+2*d[0])
-        elif spec_C_sum == 4:#四芯小截面
+        elif spec_C_sum[0] == 4:#四芯小截面
             d_l=2.42/4*(d[1]+3*d[0])
         else:
             if spec_C_int[0] == 4:#五芯中有一根小截面
@@ -39,12 +39,12 @@ def calculate_diameter(spec_C_sum, spec_S_int,spec_C_int,d_jY):
     if len(spec_C_int) == 1:#只有一根芯
         d_l_r = [x * k for x in d_True]#缆芯直径计算
     else:
-        if spec_C_sum == 3:#三芯小截面判定
+        if spec_C_sum[0] == 3:#三芯小截面判定
             if 2/3*d_s[0]>d_s[1]:
                 d_l_r = 2*d_True[0]
             else:
                 d_l_r = 2.16/3*(d_True[1]+2*d_True[0])
-        elif spec_C_sum == 4:#四芯小截面
+        elif spec_C_sum[0] == 4:#四芯小截面
             d_l_r = 2.42/4*(d_True[1]+3*d_True[0])
         else:
             if spec_C_int[0] == 4:#五芯中有一根小截面
