@@ -27,7 +27,9 @@ from 金属层_屏蔽隔离铠装 import copper_tape_thickness as ctt
 from 金属层_屏蔽隔离铠装 import isolation_sheath as iss
 from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
 from 挤包外护套 import rd_out 
-
+#格式规范输出
+import numpy as np
+    
 
 
 
@@ -104,14 +106,18 @@ for j in range(len(daoti_structure)):
 
 #获得绝缘层厚度
 d_jY = gd(name_list, voltage_numbers_int, spec_S_int)
+d_jY=np.round(d_jY,1)
 print("绝缘层厚度及平均值各为：\n", d_jY)
-print("绝缘最小厚度分别为(即最薄点)：\n", ji(d_jY))
+d_jY = ji(d_jY)
+d_jY=np.round(d_jY,1)
+print("绝缘最小厚度分别为(即最薄点)：\n", d_jY)
 
 #外径尺寸对应值
 outer_diameter =[]
 for i in daoti_structure:
       outer_diameter.append(i[-1])
 od = god(outer_diameter, d_jY)
+od=np.round(od,2)
 print("外径尺寸控制值为：", od[0],"下限值为：", od[1],"上限值为：", od[2])
 
 #获得绝缘火花实验电压
@@ -119,6 +125,7 @@ insulation_spark_test(d_jY)
 
 #获得缆芯假设直径以及缆芯直径
 d_cl=cd(spec_C_sum, spec_S_int,spec_C_int,d_jY)
+d_cl=np.round(d_cl,2)
 print("假设成缆直径为：", d_cl[0],"成缆直径为：", d_cl[1])
 
 #加BOPP带后的厚度
@@ -128,12 +135,15 @@ d_cl=d_bp
 #内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
            bp=eis(d_bp)
+           bp=np.round(bp,2)
            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
 #隔离套
            d_cl=iss(bp)
+           d_cl=np.round(d_cl,2)
            print("隔离套后的标称直径为：", d_cl[0],"隔离套后的直径为：", d_cl[1])
 #铠装
            d_cl=amwas(d_cl,full_info)
+           d_cl=np.round(d_cl,2)
            print("铠装后的标称直径为：", d_cl[0],"铠装后的直径为：", d_cl[1])
 
 elif voltage_numbers_int[1]==3:
@@ -141,6 +151,7 @@ elif voltage_numbers_int[1]==3:
             print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
             "单层铜带屏蔽"
             d_cl=ctt(bp,full_info)
+            d_cl=np.round(d_cl,2)
             print("单层铜带屏蔽后的标称直径为：", d_cl[0],"单层铜带屏蔽后的直径为：", d_cl[1])
 else:
             print("不需要挤包内护套")
@@ -151,5 +162,6 @@ else:
 
 #外护套
 d_cl=rd_out(spec_C_sum,d_cl)
+d_cl=np.round(d_cl,2)
 print("电缆外护套后标称厚度及实际厚度分别为： ",d_cl)
 
