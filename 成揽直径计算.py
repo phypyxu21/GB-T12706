@@ -3,7 +3,7 @@ from 假设直径 import r_d as rd
 from 导体结构 import get_conductor_structure as gcs
 from itertools import zip_longest
 from 外径尺寸对应值 import get_outer_diameter as god
-
+import numpy as np
 #计算
 def calculate_diameter(spec_C_sum, spec_S_int,spec_C_int,d_jY):
     k = gk(spec_C_sum)#得到成缆系数
@@ -54,6 +54,7 @@ def calculate_diameter(spec_C_sum, spec_S_int,spec_C_int,d_jY):
     D=[]
     D.append(d_l)
     D.append(d_l_r)
+    D=np.around(D,2)
     return D
 
 """
