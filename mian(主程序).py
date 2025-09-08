@@ -128,7 +128,7 @@ print("假设成缆直径为：", d_cl[0],"成缆直径为：", d_cl[1])
 #加BOPP带后的厚度
 d_bp=bt(d_cl,spec_C_sum)
 d_cl=d_bp
-d_cl=np.around(d_cl,2)
+d_cl=np.around(d_cl,3)
 #内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
            bp=eis(d_bp)

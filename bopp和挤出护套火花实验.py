@@ -6,8 +6,8 @@ def bopp_thickness(d_cl,spec_C_sum):
     #把二维列表变成一维列表
     if spec_C_sum[0] != 1:
     #加上BOPP带的厚度
-        print("加上2根BOPP带的厚度为：", [round(x + 0.24, 2) for x in d_cl])
-        return [round(x + 0.24, 2) for x in d_cl]#包bopp带的后的厚度
+        print("加上2根BOPP带的厚度为：", [x + 0.24 for x in d_cl])
+        return [x + 0.24 for x in d_cl]#包bopp带的后的厚度
     else:
         return d_cl
 """
