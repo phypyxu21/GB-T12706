@@ -124,4 +124,4 @@ def get_insulation_data(name_list, voltage_int, spec_S_int):
             if j == i[0]:
                 d.append(i[col_index])
 
-    return sorted(d)
+    return d
