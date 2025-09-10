@@ -118,10 +118,10 @@ def get_insulation_data(name_list, voltage_int, spec_S_int):
     col_index = 1 if voltage_int[1] == 1 else 2
     
     # 提取数据
-    
     for j in spec_S_int:
         for i in data_source:
+        
             if j == i[0]:
                 d.append(i[col_index])
-    
+
     return d

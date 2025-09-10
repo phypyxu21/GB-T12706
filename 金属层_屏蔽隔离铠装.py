@@ -3,6 +3,7 @@
 #后两种不做
 #铜带厚度  单芯 多芯
 "注意扁或圆金属丝铠装暂时用不上，一般为双钢带铠装或（双）非磁性钢带铠装为主"
+import numpy as np
 d_copper=[0.12,0.1]
 
 #金属带标称厚度
@@ -51,6 +52,7 @@ def copper_tape_thickness(spec_C_sum,full_info,d_cl):
 def isolation_sheath(d_cl):
     #隔离套厚度
     d_gl=[x*0.02+0.6 for x in d_cl]
+    d_gl=np.around(d_gl,2)
     print("隔离套标称厚度为：", d_gl[0])
     return [x+2*d_gl[0] for x in d_cl]
 

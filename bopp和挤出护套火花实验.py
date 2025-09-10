@@ -11,7 +11,7 @@ def bopp_thickness(d_cl,spec_C_sum):
     else:
         return d_cl
 """
-dcl=[[10.5],[11]]
+dcl=[10.5,11]
 spec_C_sum=[2]
 print("包bopp带后的厚度为：", bopp_thickness(dcl,spec_C_sum))"""
 

@@ -20,7 +20,8 @@ def judge_insulation(insulation_list: list) -> list:
             raise ValueError("绝缘值不能为负数")
     
     # 使用列表推导式处理
-    return [0.9 * value - 0.1 for value in insulation_list]
+
+    return [round(0.9 * value - 0.1, 2) for value in insulation_list]
 
 
-#print("绝缘性能测量值处理结果:", judge_insulation([1.0, 2.0, 3.0, 4.0]))
+#print("绝缘性能测量值处理结果:", judge_insulation([0.9, 2.0, 3.0, 4.0]))
