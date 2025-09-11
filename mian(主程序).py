@@ -148,7 +148,7 @@ elif voltage_numbers_int[1]==3:
             bp=np.around(bp,2)
             print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
             "单层铜带屏蔽"
-            d_cl=ctt(bp,full_info)
+            d_cl=ctt(spec_C_sum,full_info,bp)
             d_cl=np.around(d_cl,2)
             print("单层铜带屏蔽后的标称直径为：", d_cl[0],"单层铜带屏蔽后的直径为：", d_cl[1])
 else:
