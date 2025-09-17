@@ -13,7 +13,16 @@ densityOfSheathingMaterial=1.5#护套材料密度
 non_cabling_lay_ratio=1.004
 #绕包材料的密度g/cm3
 densityOfWrappingMaterial=1.5
-
+#层数
+Number_of_Layers=2
+#绕包材料的重叠率
+WrappingMaterialOverlapRate=0.3
+#云母带的密度g/cm3
+Density_of_mica_bands=1.42
+#云母带绕包带的搭盖率
+micaOverlapRate=0.4
+#层数
+micaNumberofLayers=2
 "中压电缆铜带屏蔽"
 
 def Medium_Voltage_Cable_Copper_Tape_Shielding(copper_binder_od,copper_binder_thickness,Number_of_Insulated_Cores,Stranding_Lay_Factor_of_Cable_Formation,Copper_Tape_Overlap_Rate):
@@ -67,4 +76,19 @@ def copperCoreConsumptionOfNonCompactedConductor(nominalCrossSectionOfConductor,
     return copperCoreConsumptionOfNonCompactedConductor
 
 #绕包带
+#加判断判断重叠还是间隙绕包
 def wrappingTape(outerDiameterBeforeWrapping,wrappingTapeThickness):
+    wrappingTape=np.round((outerDiameterBeforeWrapping+wrappingTapeThickness)*Number_of_Layers*wrappingTapeThickness*3.1416*densityOfWrappingMaterial/(1+WrappingMaterialOverlapRate))
+    return wrappingTape
+
+
+#云母带	
+def micaTape(diameter_the_wrap,micaTapeThickness,S,numberofinsaluation):
+    if S<6:
+        Density_of_mica_bands=0.14
+        micaTape=np.round((diameter_the_wrap+micaTapeThickness*micaNumberofLayers)*micaTapeThickness*micaNumberofLayers*3.1416*Density_of_mica_bands*(1+micaOverlapRate)*numberofinsaluation*cabling_lay_ratio,3)
+    else:
+        Density_of_mica_bands=0.17
+        micaTape=np.round((diameter_the_wrap+micaTapeThickness*micaNumberofLayers)*micaTapeThickness*micaNumberofLayers*3.1416*Density_of_mica_bands*(1+micaOverlapRate)*numberofinsaluation*cabling_lay_ratio,3)
+    return micaTape
+
