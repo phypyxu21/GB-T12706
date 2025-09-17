@@ -30,7 +30,7 @@ from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
 from 挤包外护套 import rd_out 
 #对数据进行处理
 import numpy as np
-
+from 材料计算消耗 import *
 
 
 
