@@ -3,13 +3,6 @@ import math as m
 import numpy as np
 
 "中压电缆铜带屏蔽"
-copper_density = 8.89#铜密度
-
-copper_binder_od = []#绕包铜带前外径mm
-copper_binder_thickness = []#铜带厚度mm
-Number_of_Insulated_Cores= []#绝缘线芯数
-Stranding_Lay_Factor_of_Cable_Formation=[]#成缆绞入系数
-Copper_Tape_Overlap_Rate=[]#铜带搭盖重叠率
 
 def Medium_Voltage_Cable_Copper_Tape_Shielding(copper_binder_od,copper_binder_thickness,Number_of_Insulated_Cores,Stranding_Lay_Factor_of_Cable_Formation,Copper_Tape_Overlap_Rate):
     Rated_Consumption_of_Metal_Shielding =np.round(((copper_binder_od+copper_binder_thickness)*copper_binder_thickness*3.1416*copper_density/(1-Copper_Tape_Overlap_Rate)*Number_of_Insulated_Cores*Stranding_Lay_Factor_of_Cable_Formation),1)
