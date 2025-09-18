@@ -100,14 +100,24 @@ print("导体结构为：\n", daoti_structure)
 for j in range(len(daoti_structure)):
         print("导体结构为：",daoti_structure[j][1],"单线要求为：",daoti_structure[j][2],"单线偏差为：±",daoti_structure[j][3],"紧压外径为：",daoti_structure[j][4],)#写一个按顺序输出的格式
 
-
+#获得紧压外径
+d_get_outer_diameter = []
+for i in daoti_structure:
+            d_get_outer_diameter.append(i[-1])
 #获得绝缘层厚度
 d_jY = gd(name_list, voltage_numbers_int, spec_S_int)
 
 print("绝缘层厚度及平均值各为：\n", d_jY)
-d_jY=ji(d_jY)
-d_jY=np.around(d_jY,2)
-print("绝缘最小厚度分别为(即最薄点)：\n", d_jY)
+#获得绝缘消耗量
+jy_use_mid=0
+for i in range(len(d_jY)):
+      jy_use=insulation(d_get_outer_diameter[i], d_jY[i], spec_C_int[i])
+      jy_use_mid+=jy_use
+      print("绝缘层消耗量为：", jy_use_mid)
+        
+d_jY_min=ji(d_jY)
+d_jY_min=np.around(d_jY_min,2)
+print("绝缘最小厚度分别为(即最薄点)：\n", d_jY_min)
 
 #外径尺寸对应值
 outer_diameter =[]
@@ -125,32 +135,35 @@ d_cl=cd(spec_C_sum, spec_S_int,spec_C_int,d_jY)
 print("假设成缆直径为：", d_cl[0],"成缆直径为：", d_cl[1])
 
 #加BOPP带后的厚度
-d_bp=bt(d_cl,spec_C_sum)
-d_cl=d_bp
-d_cl=np.around(d_cl,3)
+if spec_C_sum[0]>1:
+      d_bp=bt(d_cl,spec_C_sum)
+      d_bp=np.around(d_bp,3)
+else:
+      d_cl=np.around(d_cl,3)
 #内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
            bp=eis(d_bp)
            bp=np.around(bp,2)
            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
-           print(est(bp))
+           print(est(bp))#火花
 #隔离套
-           d_cl=iss(bp)
-           d_cl=np.around(d_cl,2)
-           print("隔离套后的标称直径为：", d_cl[0],"隔离套后的直径为：", d_cl[1])
+           d_GL=iss(bp)
+           d_GL=np.around(d_GL,2)
+           print("隔离套后的标称直径为：", d_GL[0],"隔离套后的直径为：", d_GL[1])
 #铠装
-           d_cl=amwas(d_cl,full_info)
-           d_cl=np.around(d_cl,2)
-           print("铠装后的标称直径为：", d_cl[0],"铠装后的直径为：", d_cl[1])
-
+           d_KZ=amwas(d_GL,full_info)
+           d_KZ=np.around(d_KZ,2)
+           print("铠装后的标称直径为：", d_KZ[0],"铠装后的直径为：", d_KZ[1])
+           d_cl=d_KZ
 elif voltage_numbers_int[1]==3:
             bp=eis(d_bp)
             bp=np.around(bp,2)
             print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
             "单层铜带屏蔽"
-            d_cl=ctt(spec_C_sum,full_info,bp)
-            d_cl=np.around(d_cl,2)
-            print("单层铜带屏蔽后的标称直径为：", d_cl[0],"单层铜带屏蔽后的直径为：", d_cl[1])
+            d_CPPER_PB=ctt(spec_C_sum,full_info,bp)
+            d_CPPER_PB=np.around(d_CPPER_PB,2)
+            print("单层铜带屏蔽后的标称直径为：", d_CPPER_PB[0],"单层铜带屏蔽后的直径为：", d_CPPER_PB[1])
+            d_cl=d_CPPER_PB
 else:
             print("不需要挤包内护套")
 
@@ -159,7 +172,7 @@ else:
 
 
 #外护套
-d_cl=rd_out(spec_C_sum,d_cl)
-d_cl=np.around(d_cl,2)
-print("电缆外护套后标称厚度及实际厚度分别为： ",d_cl)
+d_out_sheet=rd_out(spec_C_sum,d_cl)
+d_out_sheet=np.around(d_out_sheet,2)
+print("电缆外护套后标称厚度及实际厚度分别为： ",d_out_sheet)
 print(est(d_cl))
