@@ -31,6 +31,7 @@ from 挤包外护套 import rd_out
 #对数据进行处理
 import numpy as np
 from 材料计算消耗 import *
+#10mm²以下挤压    10mm²以上挤管
 
 
 
