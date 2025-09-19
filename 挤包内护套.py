@@ -52,3 +52,26 @@ def extrusion_inner_sheath(bp):
 """            
 bp=[10.5,11]
 print("挤包内护套后的厚度为：", extrusion_inner_sheath(bp))"""
+def get_extrusion_inner_sheath(bp):
+        if bp[0]<=25:
+            eis=1.0
+            return eis
+        elif 25<bp[0]<=35:
+            eis=1.2
+            return eis
+
+        elif 35<bp[0]<=45:
+            eis=1.4
+            return eis
+
+        elif 45<bp[0]<=60:
+            eis=1.6
+            return eis
+
+        elif 60<bp[0]<=80:
+            eis=1.8
+            return eis
+
+        elif 80<bp[0]:
+            eis=2.0
+            return eis

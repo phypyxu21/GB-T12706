@@ -23,10 +23,13 @@ from bopp和挤出护套火花实验 import extrusion_spark_test as est
 from itertools import zip_longest
 #获得挤包内护套厚度
 from 挤包内护套 import extrusion_inner_sheath as eis
+from 挤包内护套 import extrusion_inner_sheath_thickness as eist
 #获得金属层 屏蔽 隔离 铠装及相应厚度
 from 金属层_屏蔽隔离铠装 import copper_tape_thickness as ctt
 from 金属层_屏蔽隔离铠装 import isolation_sheath as iss
 from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
+from 金属层_屏蔽隔离铠装 import get_isolation_sheath as gis
+from 金属层_屏蔽隔离铠装 import get_armor_metal_wire_and_strip as gamwas
 from 挤包外护套 import rd_out 
 #对数据进行处理
 import numpy as np
@@ -144,25 +147,34 @@ if spec_C_sum[0]>1:
       bopp_use=wrappingTape(d_cl[0])
       print("BOPP带消耗量为：",bopp_use)
       #内护套消耗量
-      inner_sheath_use=innerSheath(d_bp[0],)
+      inner_sheath_use=innerSheath(d_bp[0],eist(d_bp))
+      print("内护套消耗量为：",inner_sheath_use)
 else:
       d_cl=np.around(d_cl,3)
+      inner_sheath_use=innerSheath(d_cl[0],eist(d_cl))
+      print("内护套消耗量为：",inner_sheath_use)
 #内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
            bp=eis(d_bp)
            bp=np.around(bp,2)
            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
-           
-
            print("护套火花实验电压为：",est(bp))#火花
+#隔离套消耗计算
+           # 缺个隔离套计算gl_use=
+
 #隔离套
            d_GL=iss(bp)
            d_GL=np.around(d_GL,2)
            print("隔离套后的标称直径为：", d_GL[0],"隔离套后的直径为：", d_GL[1])
+           #钢带铠装消耗量
+           if full_info['sheath_armour_info']['armour']=='双钢带铠装':
+                  
+                  kz_use=Steel_Tape_Armoring(d_GL[0],gamwas(d_GL,full_info))
 #铠装
            d_KZ=amwas(d_GL,full_info)
            d_KZ=np.around(d_KZ,2)
            print("铠装后的标称直径为：", d_KZ[0],"铠装后的直径为：", d_KZ[1])
+
            d_cl=d_KZ
 elif voltage_numbers_int[1]==3:
             bp=eis(d_bp)

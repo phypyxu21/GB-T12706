@@ -63,6 +63,12 @@ def isolation_sheath(d_cl):
     print("隔离套标称厚度为：", d_gl[0])
     return [x+2*d_gl[0] for x in d_cl]
 
+def get_isolation_sheath(d_cl):
+    #隔离套厚度
+    d_gl=[x*0.02+0.6 for x in d_cl]
+    d_gl=np.around(d_gl,2)
+    return d_gl[0]
+
 #铠装金属丝和金属带
 
 def armor_metal_wire_and_strip(d_cl,full_info):
@@ -113,4 +119,54 @@ def armor_metal_wire_and_strip(d_cl,full_info):
             else:
                 print("粗圆钢丝铠装厚度为：", d_Round_steel_wire[6],"mm")
                 return [x+d_Round_steel_wire[6]*2 for x in d_cl]
+            
+#获得铠装厚度或直径
+def get_armor_metal_wire_and_strip(d_cl,full_info):
+    #铠装金属丝和金属带厚度
+    if full_info['sheath_armour_info']['armour']=='双钢带铠装':
+        index=0
+        if d_cl[0]<=30:
+            print("双钢带铠装厚度为：", d_metal_band[index][0],"mm")
+            return d_metal_band[index][0]
+        if 30<d_cl[0]<=70:
+            print("双钢带铠装厚度为：", d_metal_band[index][1],"mm")
+            return d_metal_band[index][1]
+        if 70<d_cl[0]:
+            print("双钢带铠装厚度为：", d_metal_band[index][2],"mm")
+            return d_metal_band[index][2]
+    elif full_info['sheath_armour_info']['armour']=='(双)非磁性金属带铠装':
+        index=1
+        if d_cl[0]<=30:
+            print("(双)非磁性金属带铠装厚度为：", d_metal_band[index][0],"mm")
+            return d_metal_band[index][0]
+        if 30<d_cl[0]<=70:
+            print("(双)非磁性金属带铠装厚度为：", d_metal_band[index][1],"mm")
+            return d_metal_band[index][1]
+        if 70<d_cl[0]:
+            print("(双)非磁性金属带铠装厚度为：", d_metal_band[index][2],"mm")
+            return d_metal_band[index][2]
+
+    elif full_info['sheath_armour_info']['armour']=='细圆钢丝铠装'or full_info['sheath_armour_info']['armour']=='粗圆钢丝铠装':
+        if d_cl[0]<=10:
+            print("圆钢丝铠装厚度为：", d_Round_steel_wire[0],"mm")
+            return d_Round_steel_wire[0]
+        if 10<d_cl[0]<=15:
+            print("圆钢丝铠装厚度为：", d_Round_steel_wire[1],"mm")
+            return d_Round_steel_wire[1]
+        if 15<d_cl[0]<=25:
+            print("圆钢丝铠装厚度为：", d_Round_steel_wire[2],"mm")
+            return d_Round_steel_wire[2]
+        if 25<d_cl[0]<=35:
+            print("圆钢丝铠装厚度为：", d_Round_steel_wire[3],"mm")
+            return d_Round_steel_wire[3]
+        if 35<d_cl[0]<=60:
+            print("圆钢丝铠装厚度为：", d_Round_steel_wire[4],"mm")
+            return d_Round_steel_wire[4]
+        if 60<d_cl[0]:
+            if full_info['sheath_armour_info']['armour']!='粗圆钢丝铠装':
+                print("圆钢丝铠装厚度为：", d_Round_steel_wire[5],"mm")
+                return d_Round_steel_wire[5]
+            else:
+                print("粗圆钢丝铠装厚度为：", d_Round_steel_wire[6],"mm")
+                return d_Round_steel_wire[6]
             
