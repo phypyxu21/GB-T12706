@@ -23,6 +23,38 @@ Density_of_mica_bands=1.42
 micaOverlapRate=0.4
 #层数
 micaNumberofLayers=2
+#材料密度g/cm3
+material_densities = {
+    "铜": 8.89,
+    "铝": 2.703,
+    "硅烷绝缘": 0.925,
+    "交联（架空）绝缘": 0.95,
+    "聚乙烯绝缘": 0.95,
+    "聚乙烯护套": 0.95,
+    "PVC绝缘、护套": 1.5,
+    "（阻燃）聚氯乙烯绝缘": 1.6,
+    "（阻燃）聚氯乙烯护套": 1.6,
+    "无卤低烟阻燃聚烯烃护套": 1.6,
+    "半导电内屏蔽": 1.16,
+    "半导电外屏蔽": 1.16,
+    "铜带、铜丝": 8.89,
+    "复合铜带": 3.4,
+    "铝塑复合带": "待定",
+    "钢塑复合带": "待定",
+    "聚丙带": 0.95,
+    "无纺布": 0.53,
+    "PVC绕包带": 1.5,
+    "玻璃纤维带": 1,
+    "无卤阻燃玻纤带": 1.2,
+    "聚丙烯填充": 0.58,
+    "岩棉绳": 0.8,
+    "阻燃玻璃纤维绳": 0.8,
+    "钢带、钢丝": 7.8,
+    "云母带": 1.42,
+    "聚酯带": 1.4
+}
+
+
 "中压电缆铜带屏蔽"
 
 def Medium_Voltage_Cable_Copper_Tape_Shielding(copper_binder_od,copper_binder_thickness,Number_of_Insulated_Cores,Stranding_Lay_Factor_of_Cable_Formation,Copper_Tape_Overlap_Rate):
@@ -77,8 +109,8 @@ def copperCoreConsumptionOfNonCompactedConductor(nominalCrossSectionOfConductor,
 
 #绕包带
 #加判断判断重叠还是间隙绕包
-def wrappingTape(outerDiameterBeforeWrapping,wrappingTapeThickness):
-    wrappingTape=np.round((outerDiameterBeforeWrapping+wrappingTapeThickness)*Number_of_Layers*wrappingTapeThickness*3.1416*densityOfWrappingMaterial/(1+WrappingMaterialOverlapRate))
+def wrappingTape(outerDiameterBeforeWrapping):
+    wrappingTape=np.round((outerDiameterBeforeWrapping+0.06)*Number_of_Layers*0.06*3.1416*densityOfWrappingMaterial/(1-WrappingMaterialOverlapRate))
     return wrappingTape
 
 

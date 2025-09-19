@@ -114,8 +114,8 @@ jy_use_mid=0
 for i in range(len(d_jY)):
       jy_use=insulation(d_get_outer_diameter[i], d_jY[i], spec_C_int[i])
       jy_use_mid+=jy_use
-      print("绝缘层消耗量为：", jy_use_mid)
-        
+
+print("绝缘层消耗量为：", jy_use_mid)        
 d_jY_min=ji(d_jY)
 d_jY_min=np.around(d_jY_min,2)
 print("绝缘最小厚度分别为(即最薄点)：\n", d_jY_min)
@@ -139,6 +139,12 @@ print("假设成缆直径为：", d_cl[0],"成缆直径为：", d_cl[1])
 if spec_C_sum[0]>1:
       d_bp=bt(d_cl,spec_C_sum)
       d_bp=np.around(d_bp,3)
+      #默认重叠绕包，搭盖率为0.3
+      #bopp消耗量
+      bopp_use=wrappingTape(d_cl[0])
+      print("BOPP带消耗量为：",bopp_use)
+      #内护套消耗量
+      inner_sheath_use=innerSheath(d_bp[0],)
 else:
       d_cl=np.around(d_cl,3)
 #内护套厚度 然后马上接金属层
@@ -146,7 +152,9 @@ if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != No
            bp=eis(d_bp)
            bp=np.around(bp,2)
            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
-           print(est(bp))#火花
+           
+
+           print("护套火花实验电压为：",est(bp))#火花
 #隔离套
            d_GL=iss(bp)
            d_GL=np.around(d_GL,2)
