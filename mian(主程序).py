@@ -30,7 +30,9 @@ from 金属层_屏蔽隔离铠装 import isolation_sheath as iss
 from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
 from 金属层_屏蔽隔离铠装 import get_isolation_sheath as gis
 from 金属层_屏蔽隔离铠装 import get_armor_metal_wire_and_strip as gamwas
+from 金属层_屏蔽隔离铠装 import get_copper_tape_thickness as gctt
 from 挤包外护套 import rd_out 
+from 挤包外护套 import getrd_out
 #对数据进行处理
 import numpy as np
 from 材料计算消耗 import *
@@ -159,17 +161,15 @@ if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != No
            bp=np.around(bp,2)
            print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
            print("护套火花实验电压为：",est(bp))#火花
-#隔离套消耗计算
-           # 缺个隔离套计算gl_use=
 
 #隔离套
            d_GL=iss(bp)
            d_GL=np.around(d_GL,2)
            print("隔离套后的标称直径为：", d_GL[0],"隔离套后的直径为：", d_GL[1])
-           #钢带铠装消耗量
+#钢带铠装消耗量
            if full_info['sheath_armour_info']['armour']=='双钢带铠装':
-                  
                   kz_use=Steel_Tape_Armoring(d_GL[0],gamwas(d_GL,full_info))
+                  
 #铠装
            d_KZ=amwas(d_GL,full_info)
            d_KZ=np.around(d_KZ,2)
@@ -180,20 +180,27 @@ elif voltage_numbers_int[1]==3:
             bp=eis(d_bp)
             bp=np.around(bp,2)
             print("挤包内护套后的标称直径为：", bp[0],"挤包内护套后的直径为：", bp[1])
+            #铜带屏蔽的消耗量计算
+            copperband_use=Low_Voltage_Cable_Copper_Tape_Shielding(bp,gctt(spec_C_sum,full_info,bp),2,0.2)
+            print("铜带屏蔽消耗量为：",copperband_use)
             "单层铜带屏蔽"
             d_CPPER_PB=ctt(spec_C_sum,full_info,bp)
             d_CPPER_PB=np.around(d_CPPER_PB,2)
             print("单层铜带屏蔽后的标称直径为：", d_CPPER_PB[0],"单层铜带屏蔽后的直径为：", d_CPPER_PB[1])
             d_cl=d_CPPER_PB
+
 else:
             print("不需要挤包内护套")
 
 
+#外护套消耗量
 
-
+sheet_use=sheath(d_cl,getrd_out(spec_C_sum,d_cl))
+print("外护套消耗量为：",sheet_use)
 
 #外护套
 d_out_sheet=rd_out(spec_C_sum,d_cl)
 d_out_sheet=np.around(d_out_sheet,2)
 print("电缆外护套后标称厚度及实际厚度分别为： ",d_out_sheet)
+
 print(est(d_cl))

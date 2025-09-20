@@ -27,3 +27,20 @@ d_cl=[10.5, 12.3]
 rd(spec_C_sum,d_cl)
 #输出：
 print("电缆外护套后标称厚度及实际厚度分别为： ",rd(spec_C_sum,d_cl))"""
+def getrd_out(spec_C_sum,d_cl):
+    d_os=[x*0.035+1 for x in d_cl]
+    
+    if spec_C_sum[0]==1:
+        if d_os[0]<1.4:
+            print("单芯电缆外护套标称厚度为：1.4 mm ")
+            return 1.4
+        else:
+            print("单芯电缆外护套标称厚度为：", round(d_os[0],3),"mm")
+            return round(d_os[0]*2,2) 
+    else:
+        if d_os[0]<1.8:
+            print("多芯电缆外护套标称厚度为：1.8 mm ")
+            return 1.8 
+        else:
+            print("多芯电缆外护套标称厚度为：", round(d_os[0],3),"mm")
+            return round(d_os[0]*2,2)

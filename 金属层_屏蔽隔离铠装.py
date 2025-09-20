@@ -35,7 +35,23 @@ def copper_tape_thickness(spec_C_sum,full_info,d_cl):
             print("多芯电缆铜带标称厚度为：>= 0.10 mm ")
             return [x+2*d_copper[1] for x in d_cl]
 
-
+def getcopper_tape_thickness(spec_C_sum,full_info,d_cl):
+    if full_info['sheath_armour_info']['armour']==None:
+        #铜带屏蔽，可能存在其他的屏蔽
+        if spec_C_sum[0]==1:
+            print("单芯电缆铜带标称厚度为：>= 0.12 mm ")
+            return d_copper[0]
+        else:
+            print("多芯电缆铜带标称厚度为：>= 0.10 mm ")
+            return d_copper[1] 
+    elif full_info['sheath_armour_info']['armour']!= None:
+        #铜带屏蔽
+        if spec_C_sum[0]==1:
+            print("单芯电缆铜带标称厚度为：>= 0.12 mm ")
+            return d_copper[0] 
+        else:
+            print("多芯电缆铜带标称厚度为：>= 0.10 mm ")
+            return d_copper[1] 
 
 #金属铠装
 #类型如下：扁金属线铠装，圆金属丝铠装，双金属带铠装
