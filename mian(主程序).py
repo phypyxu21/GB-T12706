@@ -23,16 +23,17 @@ from bopp和挤出护套火花实验 import extrusion_spark_test as est
 from itertools import zip_longest
 #获得挤包内护套厚度
 from 挤包内护套 import extrusion_inner_sheath as eis
-from 挤包内护套 import extrusion_inner_sheath_thickness as eist
+
 #获得金属层 屏蔽 隔离 铠装及相应厚度
 from 金属层_屏蔽隔离铠装 import copper_tape_thickness as ctt
 from 金属层_屏蔽隔离铠装 import isolation_sheath as iss
 from 金属层_屏蔽隔离铠装 import armor_metal_wire_and_strip as amwas
 from 金属层_屏蔽隔离铠装 import get_isolation_sheath as gis
 from 金属层_屏蔽隔离铠装 import get_armor_metal_wire_and_strip as gamwas
-from 金属层_屏蔽隔离铠装 import get_copper_tape_thickness as gctt
+from 金属层_屏蔽隔离铠装 import getcopper_tape_thickness as gctt
 from 挤包外护套 import rd_out 
 from 挤包外护套 import getrd_out
+from 挤包内护套 import get_extrusion_inner_sheath
 #对数据进行处理
 import numpy as np
 from 材料计算消耗 import *
@@ -149,11 +150,11 @@ if spec_C_sum[0]>1:
       bopp_use=wrappingTape(d_cl[0])
       print("BOPP带消耗量为：",bopp_use)
       #内护套消耗量
-      inner_sheath_use=innerSheath(d_bp[0],eist(d_bp))
+      inner_sheath_use=innerSheath(d_bp[0],get_extrusion_inner_sheath(d_bp))
       print("内护套消耗量为：",inner_sheath_use)
 else:
       d_cl=np.around(d_cl,3)
-      inner_sheath_use=innerSheath(d_cl[0],eist(d_cl))
+      inner_sheath_use=innerSheath(d_cl[0],get_extrusion_inner_sheath(d_cl))
       print("内护套消耗量为：",inner_sheath_use)
 #内护套厚度 然后马上接金属层
 if voltage_numbers_int[1]!=3 and full_info['sheath_armour_info']['armour'] != None and full_info['outer_sheath_info'] !=None:
