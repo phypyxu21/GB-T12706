@@ -22,8 +22,8 @@ def rd_out(spec_C_sum,d_cl):
 
 """
 #样例： 
-spec_C_sum=[3]
-d_cl=[10.5, 12.3]
+spec_C_sum=[4]
+d_cl=[13.665, 0]
 rd(spec_C_sum,d_cl)
 #输出：
 print("电缆外护套后标称厚度及实际厚度分别为： ",rd(spec_C_sum,d_cl))"""
